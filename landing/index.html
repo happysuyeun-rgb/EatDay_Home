@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="잇데이 - 오늘 뭐 먹었어? 잇데이가 기억해줄게. 검색 한 번이면 칼로리부터 탄단지까지">
+  <title>🥦 잇데이 EATDAY | 기록은 쉽게, 건강은 꾸준히</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="잇데이 홈">🥦 잇데이</a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="#features" class="nav-link">기능</a>
+        <a href="#features-map" class="nav-link">맛집지도</a>
+        <a href="#features-community" class="nav-link">커뮤니티</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+      <a href="https://eatday.vercel.app" target="_blank" rel="noopener" class="btn btn-primary cta-header" aria-label="무료로 시작하기">무료로 시작하기</a>
+      <button type="button" class="btn-icon menu-toggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" aria-hidden="true">
+      <a href="#features" class="mobile-nav-link">기능</a>
+      <a href="#features-map" class="mobile-nav-link">맛집지도</a>
+      <a href="#features-community" class="mobile-nav-link">커뮤니티</a>
+      <a href="#faq" class="mobile-nav-link">FAQ</a>
+      <a href="https://eatday.vercel.app" target="_blank" rel="noopener" class="btn btn-primary btn-full">무료로 시작하기</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 01. Hero -->
+    <section class="section hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="hero-tag">식단 관리 앱</span>
+          <h1 class="hero-title">기록은 쉽게,<br>건강은 꾸준히</h1>
+          <p class="hero-sub">매번 g 단위로 입력하다 포기한 적 있잖아요.<br>잇데이는 달라요.<br>검색 한 번이면 칼로리부터 탄단지까지 다 채워줍니다.</p>
+          <p class="hero-slogan">오늘 뭐 먹었어? 잇데이가 기억해줄게 🥦</p>
+          <div class="hero-cta">
+            <a href="https://eatday.vercel.app" target="_blank" rel="noopener" class="btn btn-primary btn-lg cta-start" aria-label="무료로 시작하기">무료로 시작하기</a>
+            <a href="#features" class="btn-secondary-link btn-lg cta-demo">기능 살펴보기</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="coree-placeholder">
+            <div class="coree-img-wrap">
+              <img src="assets/coree.png" alt="콜리 캐릭터" class="coree-img" width="180" height="180">
+            </div>
+            <span class="floating-chip floating-chip-1">오늘 1,240kcal</span>
+            <span class="floating-chip floating-chip-2">단백질 달성 🎉</span>
+            <span class="floating-chip floating-chip-3">7일 연속 🔥</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. 공감 섹션 -->
+    <section class="section section-bg-alt" id="empathy">
+      <div class="container">
+        <h2 class="section-title text-center">다이어트 앱, 왜 항상 작심삼일일까요?</h2>
+        <div class="cards-row cards-3 empathy-cards">
+          <article class="card empathy-card">
+            <span class="card-emoji" aria-hidden="true">😩</span>
+            <h3 class="card-title">입력이 너무 귀찮아요</h3>
+            <p class="card-desc">닭가슴살 100g, 현미밥 150g...<br>매번 이렇게 입력하다 지쳐서 그냥 포기해요</p>
+          </article>
+          <article class="card empathy-card">
+            <span class="card-emoji" aria-hidden="true">🍽️</span>
+            <h3 class="card-title">외식하면 답이 없어요</h3>
+            <p class="card-desc">오늘 회식인데 어디서 뭘 먹어야 하죠?<br>칼로리 있는 식당 찾는 것도 일이에요</p>
+          </article>
+          <article class="card empathy-card">
+            <span class="card-emoji" aria-hidden="true">📊</span>
+            <h3 class="card-title">숫자만 있고 해결책이 없어요</h3>
+            <p class="card-desc">단백질 부족이라는 건 알겠는데<br>그래서 지금 뭘 먹으면 되는 거예요?</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. 기능 소개 -->
+    <section class="section" id="features">
+      <div class="container">
+        <h2 class="section-title text-center">잇데이는 이렇게 달라요</h2>
+
+        <article class="feature-block" id="features-record">
+          <div class="feature-content">
+            <span class="feature-tag">식단 기록</span>
+            <h3 class="feature-title">검색 한 번이면 끝이에요</h3>
+            <p class="feature-desc">음식 이름만 치면 칼로리, 탄수화물, 단백질, 지방이 전부 자동으로 채워져요. 사진도 같이 찍어두면 더 좋고요.</p>
+          </div>
+          <div class="feature-mockup">
+            <div class="phone-mockup">
+              <div class="phone-screen phone-screen-record"><span class="mockup-label">식단 기록</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-block feature-block-reverse" id="features-map">
+          <div class="feature-content">
+            <span class="feature-tag">맛집 지도</span>
+            <h3 class="feature-title">외식도 포기 안 해도 돼요</h3>
+            <p class="feature-desc">지금 있는 곳 주변에서 다이어트 친화 식당을 바로 찾아드려요. 샐러드, 포케, 닭가슴살, 비건까지 실제 영업 중인 곳만 보여드립니다.</p>
+          </div>
+          <div class="feature-mockup">
+            <div class="phone-mockup">
+              <div class="phone-screen phone-screen-map"><span class="mockup-label">맛집 지도</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-block" id="features-ai">
+          <div class="feature-content">
+            <span class="feature-tag">AI 피드백</span>
+            <h3 class="feature-title">콜리가 오늘 식단 봐줄게요</h3>
+            <p class="feature-desc">탄단지 비율이 어떤지, 오늘 뭐가 부족한지 숫자 말고 말로 알려줘요. 7일 연속 기록하면 특별한 메시지도 있어요 🎁</p>
+          </div>
+          <div class="feature-mockup">
+            <div class="phone-mockup">
+              <div class="phone-screen phone-screen-ai"><span class="mockup-label">AI 피드백</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-block feature-block-reverse" id="features-community">
+          <div class="feature-content">
+            <span class="feature-tag">커뮤니티</span>
+            <h3 class="feature-title">혼자보다 같이가 오래가요</h3>
+            <p class="feature-desc">오늘 먹은 거 공유하고 서로 응원하다 보면 어느새 한 달이 지나있어요. 베스트 식단 랭킹도 구경해보세요.</p>
+          </div>
+          <div class="feature-mockup">
+            <div class="phone-mockup">
+              <div class="phone-screen phone-screen-community"><span class="mockup-label">커뮤니티</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 04. 페르소나 -->
+    <section class="section section-bg-alt persona-section" id="persona">
+      <div class="container">
+        <h2 class="section-title text-center">이런 분들이 쓰고 있어요</h2>
+        <div class="persona-cards">
+          <article class="persona-card">
+            <div class="persona-header">
+              <span class="persona-icon" aria-hidden="true">👩‍💼</span>
+              <div>
+                <h3 class="persona-name">직장인 민지씨 이야기</h3>
+                <p class="persona-meta">29세 · 3개월 -5kg 목표</p>
+              </div>
+            </div>
+            <blockquote class="persona-quote">"회식이 문제였는데 맛집 지도로 미리 식당 골라가고 다음날 식단 조절하니까 됐어요"</blockquote>
+            <ul class="persona-checks">
+              <li>✅ 점심 맛집 지도로 미리 선택</li>
+              <li>✅ 회식 후 AI 피드백으로 조절</li>
+              <li>✅ 7일 연속 달성하고 콜리 레벨업</li>
+            </ul>
+            <a href="https://eatday.vercel.app" target="_blank" rel="noopener" class="btn btn-primary cta-start">나도 시작해볼게요</a>
+          </article>
+          <article class="persona-card">
+            <div class="persona-header">
+              <span class="persona-icon" aria-hidden="true">👨‍🎓</span>
+              <div>
+                <h3 class="persona-name">대학생 준호씨 이야기</h3>
+                <p class="persona-meta">23세 · 단백질 140g 목표</p>
+              </div>
+            </div>
+            <blockquote class="persona-quote">"학식 먹을 때마다 단백질 얼마인지 몰랐는데 이제 검색하면 바로 나와요"</blockquote>
+            <ul class="persona-checks">
+              <li>✅ 학식 메뉴 영양소 바로 검색</li>
+              <li>✅ 단백질 달성률 실시간 확인</li>
+              <li>✅ 커뮤니티에서 고단백 식단 공유</li>
+            </ul>
+            <a href="https://eatday.vercel.app" target="_blank" rel="noopener" class="btn btn-primary cta-start">나도 시작해볼게요</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. 콜리 섹션 -->
+    <section class="section coree-section" id="coree">
+      <div class="container">
+        <h2 class="section-title text-center">기록할수록 콜리가 자라요 🥦</h2>
+        <p class="section-lead text-center">꾸준히 기록하면 콜리가 레벨업해요.<br>3일, 7일, 30일마다 깜짝 보상박스도 열려요.<br>작은 습관이 쌓이는 게 눈에 보이니까 신기하게 계속하게 돼요.</p>
+        <div class="coree-stages">
+          <div class="coree-stage-item">
+            <span class="coree-stage-emoji">🌱</span>
+            <span class="coree-stage-label">새싹</span>
+          </div>
+          <span class="coree-arrow">→</span>
+          <div class="coree-stage-item">
+            <span class="coree-stage-emoji">🥦</span>
+            <span class="coree-stage-label">쑥쑥</span>
+          </div>
+          <span class="coree-arrow">→</span>
+          <div class="coree-stage-item">
+            <span class="coree-stage-emoji">⭐</span>
+            <span class="coree-stage-label">완성</span>
+          </div>
+        </div>
+        <div class="coree-rewards">
+          <div class="coree-reward"><span class="reward-icon">📦</span> 3일 연속 — 브론즈 박스 오픈</div>
+          <div class="coree-reward"><span class="reward-icon">📦</span> 7일 연속 — 실버 박스 오픈</div>
+          <div class="coree-reward"><span class="reward-icon">📦</span> 30일 연속 — 골드 박스 오픈</div>
+        </div>
+        <div class="coree-cta">
+          <p class="coree-cta-text">콜리 키우러 가볼까요?</p>
+          <a href="https://eatday.vercel.app" target="_blank" rel="noopener" class="btn btn-primary btn-lg cta-start" aria-label="무료로 시작하기">무료로 시작하기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. FAQ -->
+    <section class="section faq-section" id="faq">
+      <div class="container container-narrow">
+        <h2 class="section-title text-center">궁금한 게 있으신가요?</h2>
+        <div class="faq-list" role="list">
+          <div class="faq-item" role="listitem">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-1" id="faq-trigger-1">돈 드나요?</button>
+            <div class="faq-panel" id="faq-1" role="region" aria-labelledby="faq-trigger-1" hidden>
+              <p>아니요, 지금은 전부 무료예요. 나중에 프리미엄 기능이 생기면 미리 알려드릴게요.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-2" id="faq-trigger-2">음식 어떻게 기록해요?</button>
+            <div class="faq-panel" id="faq-2" role="region" aria-labelledby="faq-trigger-2" hidden>
+              <p>이름만 검색하면 칼로리랑 영양소가 자동으로 나와요. 없으면 직접 입력할 수도 있어요.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-3" id="faq-trigger-3">맛집 지도가 정확한가요?</button>
+            <div class="faq-panel" id="faq-3" role="region" aria-labelledby="faq-trigger-3" hidden>
+              <p>서울시 공식 데이터 기반이라 폐업한 가게는 안 보여요. 영업 중인 곳만 초록 마커로 표시돼요.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-4" id="faq-trigger-4">콜리가 뭐예요?</button>
+            <div class="faq-panel" id="faq-4" role="region" aria-labelledby="faq-trigger-4" hidden>
+              <p>잇데이 마스코트 브로콜리예요 🥦 기록할수록 레벨업하고 보상도 받을 수 있어요.</p>
+            </div>
+          </div>
+          <div class="faq-item" role="listitem">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-5" id="faq-trigger-5">내 식단 데이터 안전해요?</button>
+            <div class="faq-panel" id="faq-5" role="region" aria-labelledby="faq-trigger-5" hidden>
+              <p>네, 암호화 저장되고 본인만 볼 수 있어요. 탈퇴하면 모든 데이터 즉시 삭제돼요.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">🥦 잇데이 EATDAY</span>
+        <nav class="footer-nav">
+          <a href="#">이용약관</a>
+          <a href="#">개인정보처리방침</a>
+        </nav>
+        <p class="footer-copy">© 2026 잇데이. 오늘 뭐 먹었어? 잇데이가 기억해줄게.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
