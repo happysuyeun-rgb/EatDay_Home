@@ -39,7 +39,7 @@ const restaurants = [
 
 export default function RestaurantMap() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px", amount: 0.15 });
+  const isInView = useInView(ref, { once: true, margin: "0px 0px 240px 0px", amount: 0 });
   const [activeFilter, setActiveFilter] = useState(null);
   const [selectedId, setSelectedId] = useState("a");
 
@@ -54,219 +54,197 @@ export default function RestaurantMap() {
   const pinMatches = (r) => !activeFilter || r.filter === activeFilter;
 
   return (
-    <section ref={ref} id="map" className="py-24 md:py-32 bg-cream px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-start">
-          {/* Copy + filters */}
-          <div className="order-2 md:order-1">
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              className="text-sm font-semibold text-[var(--accent-leaf)] tracking-wide"
-            >
-              맛집 지도
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 }}
-              className="text-2xl md:text-3xl font-bold mt-2 mb-4 text-[var(--text-primary)]"
-            >
-              다이어트는 집 밖에서
-              <br className="hidden sm:block" />
-              무너지기 쉬우니까
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 }}
-              className="text-[var(--text-secondary)] leading-relaxed mb-8"
-            >
-              내 주변 저칼로리·고단백 식당을 바로 찾고, 메뉴 정보까지 확인하세요.
-            </motion.p>
+    <motion.section
+      ref={ref}
+      id="map"
+      className="relative scene-map py-32 md:py-48 px-0 md:px-6 overflow-hidden"
+      initial={{ y: 32 }}
+      whileInView={{ y: 0 }}
+      viewport={{ once: true, margin: "0px 0px 200px 0px", amount: 0 }}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {/* Full-bleed headline */}
+      <div className="max-w-[1280px] mx-auto px-4 md:px-0 mb-12 md:mb-16">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-xs font-semibold text-[var(--accent-leaf)] tracking-[0.2em] uppercase mb-6"
+        >
+          맛집 지도
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-[var(--text-primary)] leading-[1.1] tracking-[-0.03em] max-w-4xl text-balance"
+        >
+          다이어트는 집 밖에서
+          <br className="hidden sm:block" />
+          <span className="text-[var(--accent-forest)]">무너지기 쉬우니까</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="mt-8 text-lg md:text-xl text-[var(--text-secondary)] max-w-xl leading-relaxed"
+        >
+          내 주변 저칼로리·고단백 식당을 바로 찾고, 메뉴 정보까지 확인하세요.
+        </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 }}
-              className="flex flex-wrap gap-2"
-              role="group"
-              aria-label="필터"
-            >
-              {filters.map((f) => {
-                const isActive = activeFilter === f.id;
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mt-10 flex flex-wrap gap-2"
+          role="group"
+          aria-label="필터"
+        >
+          {filters.map((f) => {
+            const isActive = activeFilter === f.id;
+            return (
+              <motion.button
+                key={f.id}
+                type="button"
+                whileTap={{ scale: 0.97 }}
+                onClick={() => setActiveFilter((prev) => (prev === f.id ? null : f.id))}
+                className={`px-5 py-3 rounded-2xl text-sm font-semibold border-2 transition-all duration-200 ${
+                  isActive
+                    ? "bg-[var(--accent-leaf)] text-white border-[var(--accent-leaf)] shadow-[0_8px_24px_rgba(74,124,89,0.3)]"
+                    : "bg-white/80 border-black/[0.08] text-[var(--text-secondary)] hover:border-[var(--accent-leaf)]/40 hover:text-[var(--accent-leaf)]"
+                }`}
+              >
+                {f.label}
+              </motion.button>
+            );
+          })}
+        </motion.div>
+      </div>
+
+      {/* Map stage — dominant */}
+      <div className="max-w-[1280px] mx-auto px-4 md:px-0">
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.12, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="rounded-[1.75rem] md:rounded-[2rem] bg-[#1a1f1c] p-2 md:p-3 shadow-[0_32px_80px_rgba(0,0,0,0.15)] ring-1 ring-black/20"
+        >
+          <div className="rounded-[1.25rem] md:rounded-[1.5rem] overflow-hidden bg-white border border-black/[0.06]">
+            <div className="relative h-[min(75vw,480px)] sm:h-[min(70vw,520px)] md:h-[min(55vw,640px)] lg:h-[680px] overflow-hidden">
+              <motion.div
+                initial={{ scale: 1.12 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 bg-gradient-to-br from-oat via-sand to-[var(--accent-blush)]/50"
+              />
+              <div
+                className="absolute inset-0 opacity-[0.4]"
+                style={{
+                  backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 17px, rgba(0,0,0,0.035) 17px, rgba(0,0,0,0.035) 18px),
+                    repeating-linear-gradient(90deg, transparent, transparent 17px, rgba(0,0,0,0.035) 17px, rgba(0,0,0,0.035) 18px)`,
+                }}
+                aria-hidden
+              />
+              <div
+                className="absolute inset-0 opacity-25"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 85% 65% at 42% 42%, rgba(74,124,89,0.18), transparent 72%)",
+                }}
+                aria-hidden
+              />
+
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+                <span className="w-3 h-3 rounded-full bg-[var(--accent-leaf)] ring-[6px] ring-[var(--accent-leaf)]/30 shadow-lg" />
+                <span className="text-[11px] font-bold text-[var(--text-primary)] mt-2 bg-white/95 px-2.5 py-1 rounded-lg border border-black/[0.06] shadow-sm">
+                  현재 위치
+                </span>
+              </div>
+
+              {restaurants.map((r, i) => {
+                const isSelected = selectedId === r.id;
+                const dimmed = !pinMatches(r);
                 return (
                   <motion.button
-                    key={f.id}
+                    key={r.id}
                     type="button"
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() =>
-                      setActiveFilter((prev) => (prev === f.id ? null : f.id))
-                    }
-                    className={`px-4 py-2.5 rounded-xl text-sm font-medium border transition-colors duration-200 ${
-                      isActive
-                        ? "bg-[var(--accent-leaf)] text-white border-[var(--accent-leaf)] shadow-[0_4px_14px_rgba(74,124,89,0.25)]"
-                        : "bg-white border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-leaf)]/40 hover:text-[var(--accent-leaf)]"
-                    }`}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: dimmed ? 0.3 : 1, scale: 1 }}
+                    transition={{ delay: 0.5 + i * 0.1, duration: 0.4, type: "spring", stiffness: 260 }}
+                    whileHover={{ scale: dimmed ? 1 : 1.15 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setSelectedId(r.id)}
+                    className="absolute z-20 -translate-x-1/2 -translate-y-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-leaf)] rounded-full"
+                    style={{ top: r.top, left: r.left }}
+                    aria-label={`${r.name}, ${r.distance}`}
+                    aria-pressed={isSelected}
                   >
-                    {f.label}
+                    <span className="relative flex items-center justify-center w-10 h-10">
+                      {isSelected && (
+                        <motion.span
+                          className="absolute inset-0 rounded-full bg-[var(--accent-leaf)]/30"
+                          animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                      )}
+                      <span
+                        className={`relative w-3.5 h-3.5 rounded-full border-[3px] border-white shadow-lg ${
+                          isSelected ? "bg-[var(--accent-leaf)] scale-110" : "bg-[var(--accent-forest)]"
+                        }`}
+                      />
+                    </span>
                   </motion.button>
                 );
               })}
-            </motion.div>
-          </div>
 
-          {/* Map + card */}
-          <div className="order-1 md:order-2 relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.2, duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
-              className="rounded-2xl bg-white overflow-hidden shadow-[var(--shadow)] border border-[var(--border)]"
-            >
-              <div className="relative h-[min(52vw,280px)] md:h-[320px] overflow-hidden">
-                {/* Map-like surface */}
-                <motion.div
-                  initial={{ scale: 1.08 }}
-                  animate={isInView ? { scale: 1 } : { scale: 1.08 }}
-                  transition={{ delay: 0.25, duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
-                  className="absolute inset-0 bg-gradient-to-br from-oat via-sand to-[var(--accent-blush)]/40"
-                />
-                <div
-                  className="absolute inset-0 opacity-[0.35]"
-                  style={{
-                    backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 17px, rgba(0,0,0,0.04) 17px, rgba(0,0,0,0.04) 18px),
-                      repeating-linear-gradient(90deg, transparent, transparent 17px, rgba(0,0,0,0.04) 17px, rgba(0,0,0,0.04) 18px)`,
-                  }}
-                  aria-hidden
-                />
-                <div
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    background:
-                      "radial-gradient(ellipse 80% 60% at 40% 45%, rgba(74,124,89,0.12), transparent 70%)",
-                  }}
-                  aria-hidden
-                />
-
-                {/* Current location */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-leaf)] ring-4 ring-[var(--accent-leaf)]/25" />
-                  <span className="text-[10px] font-medium text-[var(--text-tertiary)] mt-1 bg-white/90 px-2 py-0.5 rounded-md border border-[var(--border)]">
-                    현재 위치
-                  </span>
-                </div>
-
-                {/* Pins */}
-                {restaurants.map((r, i) => {
-                  const isSelected = selectedId === r.id;
-                  const dimmed = !pinMatches(r);
-                  return (
-                    <motion.button
-                      key={r.id}
-                      type="button"
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={
-                        isInView
-                          ? { opacity: dimmed ? 0.35 : 1, scale: 1 }
-                          : { opacity: 0, scale: 0 }
-                      }
-                      transition={{ delay: 0.45 + i * 0.12, duration: 0.35 }}
-                      whileHover={{ scale: dimmed ? 1 : 1.12 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setSelectedId(r.id)}
-                      className="absolute z-20 -translate-x-1/2 -translate-y-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-leaf)] rounded-full"
-                      style={{ top: r.top, left: r.left }}
-                      aria-label={`${r.name}, ${r.distance}`}
-                      aria-pressed={isSelected}
-                    >
-                      <span className="relative flex items-center justify-center w-8 h-8">
-                        {isSelected && (
-                          <motion.span
-                            className="absolute inset-0 rounded-full bg-[var(--accent-leaf)]/25"
-                            animate={{ scale: [1, 1.35, 1], opacity: [0.6, 0, 0.6] }}
-                            transition={{
-                              duration: 2.2,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                            }}
-                          />
-                        )}
-                        <span
-                          className={`relative w-3 h-3 rounded-full border-2 border-white shadow-md ${
-                            isSelected
-                              ? "bg-[var(--accent-leaf)] ring-2 ring-[var(--accent-leaf)]/50"
-                              : "bg-[var(--accent-forest)]"
-                          }`}
-                        />
-                      </span>
-                    </motion.button>
-                  );
-                })}
-
-                {/* Distance bar */}
-                <div className="absolute bottom-3 left-3 right-3 md:right-auto md:max-w-[220px] z-10 rounded-xl bg-white/95 backdrop-blur-sm py-2 px-3 text-xs text-[var(--text-secondary)] border border-[var(--border)] shadow-sm">
-                  현재 위치 기준 · 반경 500m
-                </div>
+              <div className="absolute bottom-4 left-4 right-4 md:right-auto md:max-w-[260px] z-10 rounded-xl bg-white/95 backdrop-blur-md py-2.5 px-4 text-sm font-medium text-[var(--text-secondary)] border border-black/[0.06] shadow-lg">
+                내 주변 500m
               </div>
+            </div>
 
-              {/* Desktop: inline detail card */}
-              <div className="hidden md:block p-4 border-t border-[var(--border)]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={selected.id}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.25 }}
-                    className="rounded-xl bg-oat/60 border border-[var(--border)] p-4"
-                  >
-                    <div className="flex justify-between items-start gap-3">
-                      <div>
-                        <p className="font-semibold text-[var(--text-primary)]">
-                          {selected.name}
-                        </p>
-                        <p className="text-sm text-[var(--accent-leaf)] font-medium mt-1">
-                          {selected.filter} · {selected.distance}
-                        </p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-2 leading-relaxed">
-                          {selected.menu}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </motion.div>
-
-            {/* Mobile: bottom sheet */}
-            <div className="md:hidden mt-3">
+            <div className="hidden md:block p-5 md:p-6 bg-gradient-to-b from-white to-oat/30 border-t border-black/[0.05]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selected.id}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  className="rounded-t-2xl rounded-b-2xl bg-white border border-[var(--border)] shadow-[var(--shadow-hover)] p-4"
-                  role="region"
-                  aria-live="polite"
-                  aria-label="선택한 식당"
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                  className="rounded-xl bg-white border border-[var(--border)] p-5 shadow-sm"
                 >
-                  <div className="mx-auto w-10 h-1 rounded-full bg-[var(--border)] mb-3" aria-hidden />
-                  <p className="font-semibold text-[var(--text-primary)]">{selected.name}</p>
-                  <p className="text-sm text-[var(--accent-leaf)] font-medium mt-1">
+                  <p className="font-bold text-lg text-[var(--text-primary)]">{selected.name}</p>
+                  <p className="text-sm font-semibold text-[var(--accent-leaf)] mt-1">
                     {selected.filter} · {selected.distance}
                   </p>
-                  <p className="text-sm text-[var(--text-secondary)] mt-2 leading-relaxed">
-                    {selected.menu}
-                  </p>
+                  <p className="text-base text-[var(--text-secondary)] mt-3 leading-relaxed">{selected.menu}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
           </div>
+        </motion.div>
+
+        <div className="md:hidden mt-5 px-0">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selected.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ type: "spring", stiffness: 380, damping: 32 }}
+              className="rounded-2xl bg-white border border-black/[0.08] shadow-[var(--shadow-hover)] p-5"
+              role="region"
+              aria-live="polite"
+              aria-label="선택한 식당"
+            >
+              <div className="mx-auto w-12 h-1 rounded-full bg-black/[0.08] mb-4" aria-hidden />
+              <p className="font-bold text-lg text-[var(--text-primary)]">{selected.name}</p>
+              <p className="text-sm font-semibold text-[var(--accent-leaf)] mt-1">
+                {selected.filter} · {selected.distance}
+              </p>
+              <p className="text-base text-[var(--text-secondary)] mt-3 leading-relaxed">{selected.menu}</p>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

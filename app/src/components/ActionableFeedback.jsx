@@ -1,132 +1,129 @@
-import { useRef } from "react";
 import ColiAsset from "./ColiAsset";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function ActionableFeedback() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px", amount: 0.2 });
-
   return (
-    <section ref={ref} className="py-24 md:py-32 bg-oat px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12 md:mb-16">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            className="text-sm font-semibold text-[var(--accent-leaf)] tracking-wide"
-          >
-            AI 피드백
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 }}
-            className="text-2xl md:text-3xl font-bold mt-2 mb-4 text-[var(--text-primary)]"
-          >
-            분석만이 아니라, 다음 선택까지
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
-            className="text-[var(--text-secondary)] max-w-2xl mx-auto"
-          >
-            탄단지 비율과 부족한 영양소를 확인하고, 지금 먹으면 좋은 음식을 추천해드려요.
-          </motion.p>
-        </div>
+    <motion.section
+      className="relative py-28 md:py-40 px-4 md:px-6 overflow-hidden scene-feedback"
+      initial={{ y: 28 }}
+      whileInView={{ y: 0 }}
+      viewport={{ once: true, margin: "0px 0px 200px 0px", amount: 0 }}
+      transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+    >
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.25, duration: 0.5 }}
-          className="rounded-2xl bg-white p-6 md:p-8 shadow-[var(--shadow)] border border-[var(--border)] max-w-lg mx-auto relative"
+      <div className="max-w-3xl mx-auto text-center mb-14 md:mb-20 relative z-10">
+        <motion.span
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-xs font-semibold text-[var(--accent-leaf)] tracking-[0.18em] uppercase"
         >
-          {/* 1. Today's summary */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.35 }}
-            className="pb-6 border-b border-[var(--border)]"
-          >
-            <p className="text-xs font-medium text-[var(--text-tertiary)] uppercase tracking-wider mb-3">
-              오늘 식단 요약
-            </p>
-            <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm">
-              <span className="text-[var(--text-primary)]">3끼 · 1,240 kcal</span>
-              <span className="text-[var(--text-tertiary)]">탄 45% · 단 28% · 지 27%</span>
-            </div>
-          </motion.div>
-
-          {/* 2. Deficiency */}
-          <motion.div
-            initial={{ opacity: 0, x: -8 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.5, duration: 0.4 }}
-            className="py-5"
-          >
-            <p className="text-sm font-medium text-[var(--text-primary)]">
-              단백질이 조금 부족해요
-            </p>
-          </motion.div>
-
-          {/* 3. Recommendation — expands from deficiency */}
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={isInView ? { opacity: 1, height: "auto" } : {}}
-            transition={{ delay: 0.65, duration: 0.45, ease: [0.22, 0.61, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className="relative rounded-xl bg-[var(--accent-leaf)]/5 border border-[var(--accent-leaf)]/15 border-l-4 border-l-[var(--accent-leaf)]/50 p-4">
-              <div className="flex gap-3">
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold text-[var(--accent-leaf)] mb-1.5">
-                    추천
-                  </p>
-                  <p className="text-sm text-[var(--text-primary)] leading-relaxed">
-                    다음 한 끼는 그릭요거트나 닭가슴살 샐러드로 가볍게 채워보세요
-                  </p>
-                </div>
-                {/* Coli — tiny, supportive */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ delay: 0.9 }}
-                  className="shrink-0 w-10 h-10 rounded-full bg-[var(--accent-lime)]/20 flex items-center justify-center"
-                >
-                  <ColiIcon />
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* 4. Balance status */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.85 }}
-            className="mt-6 pt-4 border-t border-[var(--border)]"
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-tertiary)]">오늘 균형</span>
-              <span className="text-sm font-medium text-[var(--accent-leaf)]">
-                보완 필요
-              </span>
-            </div>
-            <div className="mt-2 h-1.5 rounded-full bg-oat overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={isInView ? { width: "72%" } : { width: 0 }}
-                transition={{ delay: 0.95, duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
-                className="h-full rounded-full bg-[var(--accent-leaf)]/60"
-              />
-            </div>
-          </motion.div>
-        </motion.div>
+          AI 피드백
+        </motion.span>
+        <motion.h2
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.06, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="text-3xl sm:text-4xl md:text-[2.65rem] font-bold mt-5 mb-6 text-[var(--text-primary)] leading-[1.15] tracking-[-0.02em] text-balance"
+        >
+          숫자 끝이 아니라,
+          <br />
+          <span className="text-[var(--accent-forest)]">다음 행동까지</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.14, duration: 0.5 }}
+          className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed"
+        >
+          "부족해요"에서 멈추지 않고, 뭘 먹을지까지 연결해드려요.
+        </motion.p>
       </div>
-    </section>
-  );
-}
 
-function ColiIcon() {
-  return <ColiAsset size="sm" />;
+      {/* Layered panel — center focus, card glow */}
+      <motion.div
+        initial={{ opacity: 0, y: 36 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.18, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-3xl mx-auto relative z-10"
+      >
+        <div className="rounded-[1.5rem] border border-[var(--accent-leaf)]/20 bg-gradient-to-b from-mist/60 to-oat/40 p-1 shadow-[0_24px_60px_rgba(45,90,61,0.12)]">
+          <div className="rounded-[1.35rem] bg-white/95 backdrop-blur-sm p-7 md:p-10 border border-white/80">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="pb-7 border-b border-black/[0.06]"
+            >
+              <p className="text-[11px] font-bold text-[var(--text-tertiary)] uppercase tracking-[0.16em] mb-4">
+                오늘 식단 요약
+              </p>
+              <div className="flex flex-wrap gap-x-8 gap-y-2 text-base">
+                <span className="font-semibold text-[var(--text-primary)]">3끼 · 1,240 kcal</span>
+                <span className="text-[var(--text-tertiary)]">탄 45% · 단 28% · 지 27%</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.42, duration: 0.45 }}
+              className="py-6"
+            >
+              <p className="text-lg font-semibold text-[var(--text-primary)]">단백질이 조금 부족해요</p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              transition={{ delay: 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="relative rounded-xl bg-[var(--accent-leaf)]/[0.07] border border-[var(--accent-leaf)]/20 border-l-[4px] border-l-[var(--accent-leaf)] p-5 md:p-6">
+                <div className="flex gap-4">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-bold text-[var(--accent-leaf)] uppercase tracking-wider mb-2">
+                      추천
+                    </p>
+                    <p className="text-base md:text-lg text-[var(--text-primary)] leading-relaxed">
+                      다음 한 끼는 그릭요거트나 닭가슴살 샐러드로 가볍게 채워보세요
+                    </p>
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.85 }}
+                    className="shrink-0 w-11 h-11 rounded-full bg-[var(--accent-lime)]/25 flex items-center justify-center border border-[var(--accent-leaf)]/10"
+                  >
+                    <ColiAsset size="sm" />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.75 }}
+              className="mt-8 pt-6 border-t border-black/[0.06]"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-wider">
+                  오늘 균형
+                </span>
+                <span className="text-sm font-bold text-[var(--accent-leaf)]">보완 필요</span>
+              </div>
+              <div className="h-2 rounded-full bg-oat overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: "72%" }}
+                  transition={{ delay: 0.88, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="h-full rounded-full bg-gradient-to-r from-[var(--accent-lime)]/80 to-[var(--accent-leaf)]"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.section>
+  );
 }

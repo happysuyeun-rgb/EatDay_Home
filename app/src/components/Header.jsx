@@ -27,15 +27,15 @@ export default function Header() {
       className="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-6"
     >
       <div
-        className={`max-w-6xl mx-auto flex items-center justify-between h-14 px-5 rounded-2xl border transition-all duration-300 ${
+        className={`max-w-[1200px] mx-auto flex items-center justify-between h-[3.25rem] md:h-14 px-5 rounded-2xl border transition-all duration-300 ${
           scrolled
-            ? "bg-white/85 backdrop-blur-md border-[var(--border)] shadow-[0_2px_20px_rgba(0,0,0,0.04)]"
-            : "bg-transparent border-transparent"
+            ? "bg-white/90 backdrop-blur-xl border-black/[0.06] shadow-[0_8px_32px_rgba(0,0,0,0.06)]"
+            : "bg-white/40 backdrop-blur-md border-white/40 shadow-sm"
         }`}
       >
         <Link
           to="/"
-          className="text-lg font-semibold text-[var(--text-primary)] tracking-tight hover:text-[var(--accent-leaf)] transition-colors"
+          className="text-base md:text-lg font-bold text-[var(--text-primary)] tracking-[-0.02em] hover:text-[var(--accent-leaf)] transition-colors"
         >
           EATDAY
         </Link>

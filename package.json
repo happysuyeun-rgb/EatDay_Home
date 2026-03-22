@@ -1,0 +1,10 @@
+{
+  "name": "eatday-home",
+  "private": true,
+  "description": "EATDAY 랜딩 — 실제 앱은 app/ 폴더",
+  "scripts": {
+    "dev": "npm run dev --prefix app",
+    "build": "npm run build --prefix app",
+    "preview": "npm run preview --prefix app"
+  }
+}

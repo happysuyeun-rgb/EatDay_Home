@@ -24,14 +24,14 @@ app/
 │   │   ├── ColiWarmth.jsx
 │   │   ├── FAQ.jsx
 │   │   ├── FinalCTA.jsx
-│   │   └── Footer.jsx
+│   │   ├── Footer.jsx
+│   │   ├── SceneRibbon.jsx
+│   │   ├── ColiAsset.jsx
+│   │   └── LegalLayout.jsx
 │   ├── pages/
 │   │   ├── LandingPage.jsx
 │   │   ├── Terms.jsx
 │   │   └── Privacy.jsx
-│   ├── motion/
-│   │   ├── index.js
-│   │   └── variants.js
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css

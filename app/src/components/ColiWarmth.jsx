@@ -1,105 +1,68 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import ColiAsset from "./ColiAsset";
 
-const hints = [
-  { label: "기록 안내", delay: 0.5 },
-  { label: "피드백 안내", delay: 0.7 },
-  { label: "리포트 안내", delay: 0.9 },
-];
-
+/**
+ * Typography-led interlude: copy leads, Coli is a quiet footnote.
+ */
 export default function ColiWarmth() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px", amount: 0.3 });
-
   return (
     <section
-      ref={ref}
-      className="relative py-24 md:py-32 px-4 md:px-8 overflow-hidden"
+      className="relative py-28 md:py-36 px-4 md:px-6 overflow-hidden scene-coli"
       aria-labelledby="coli-heading"
     >
-      {/* Soft spotlight gradient */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-50"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(127,176,105,0.1) 0%, transparent 60%)",
+        }}
         aria-hidden
-      >
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,480px)] h-[min(90vw,320px)] rounded-full opacity-40"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, rgba(127,176,105,0.12) 0%, transparent 70%)",
-          }}
-        />
-      </div>
+      />
 
-      <div className="relative max-w-2xl mx-auto text-center">
-        {/* Coli visual with subtle float */}
-        <motion.div
-          className="relative px-4 py-6 md:px-8 md:py-8 mb-10"
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={
-            isInView
-              ? {
-                  opacity: 1,
-                  scale: 1,
-                  y: [0, -4, 0],
-                }
-              : {}
-          }
-          transition={{
-            opacity: { duration: 0.5 },
-            scale: { duration: 0.5 },
-            y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-          }}
+      <div className="relative max-w-4xl mx-auto">
+        <motion.blockquote
+          initial={{ opacity: 0, y: 36 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-medium text-[var(--text-primary)] leading-[1.35] tracking-[-0.02em] text-balance text-center px-2"
         >
-          <div className="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full bg-[var(--accent-lime)]/15 flex items-center justify-center overflow-hidden border border-[var(--accent-leaf)]/10">
+          기록과 피드백, 리포트까지.
+          <br />
+          <span className="text-[var(--text-secondary)]">필요한 순간마다 이어집니다.</span>
+        </motion.blockquote>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.35, duration: 0.5 }}
+          className="flex flex-col items-center mt-14 md:mt-16"
+        >
+          <div className="flex items-center gap-3 text-[var(--text-tertiary)] mb-4">
+            <span className="h-px w-8 bg-[var(--text-tertiary)]/30" aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em]">파트너</span>
+            <span className="h-px w-8 bg-[var(--text-tertiary)]/30" aria-hidden />
+          </div>
+          <div className="w-16 h-16 rounded-2xl bg-white border border-black/[0.06] shadow-sm flex items-center justify-center">
             <ColiAsset size="lg" />
           </div>
-
-          {/* Tiny UI hints around character */}
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: hints[0].delay, duration: 0.35 }}
-            className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full text-[10px] font-medium text-[var(--text-tertiary)] bg-white/90 px-2 py-1 rounded-md border border-[var(--border)] shadow-sm whitespace-nowrap -mt-1"
+          <motion.h2
+            id="coli-heading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.45 }}
+            className="text-base md:text-lg font-semibold text-[var(--text-primary)] mt-5"
           >
-            기록 안내
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: hints[1].delay, duration: 0.35 }}
-            className="absolute left-full top-1/2 -translate-y-1/2 ml-2 text-[10px] font-medium text-[var(--text-tertiary)] bg-white/90 px-2 py-1 rounded-md border border-[var(--border)] shadow-sm whitespace-nowrap hidden sm:inline"
+            콜리는 잇데이의 기록 파트너입니다
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.52 }}
+            className="text-sm md:text-base text-[var(--text-secondary)] mt-3 max-w-md text-center leading-relaxed"
           >
-            피드백 안내
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: hints[2].delay, duration: 0.35 }}
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full text-[10px] font-medium text-[var(--text-tertiary)] bg-white/90 px-2 py-1 rounded-md border border-[var(--border)] shadow-sm whitespace-nowrap mt-1"
-          >
-            리포트 안내
-          </motion.span>
+            조금 더 편안하게 식단 관리를 이어갈 수 있도록 돕습니다.
+          </motion.p>
         </motion.div>
-
-        <motion.h2
-          id="coli-heading"
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2 }}
-          className="text-lg md:text-xl font-semibold text-[var(--text-primary)] mb-3"
-        >
-          콜리는 잇데이의 기록 파트너입니다
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3 }}
-          className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed max-w-md mx-auto"
-        >
-          필요한 순간, 조금 더 편안하게 식단 관리를 이어갈 수 있도록 돕습니다.
-        </motion.p>
       </div>
     </section>
   );

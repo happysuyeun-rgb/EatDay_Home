@@ -7,6 +7,7 @@ export default {
         cream: "#FAF9F7",
         oat: "#F5F3EF",
         sand: "#EDEAE4",
+        mist: "#EEF2EE",
         leaf: "#4A7C59",
         forest: "#2D5A3D",
         lime: "#7FB069",

@@ -2,40 +2,31 @@ import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 
 const lines = [
-  "식단 입력하다 지쳐 포기한 적 있죠.",
-  "외식하는 날엔 식단 관리가 흐트러지고.",
-  "숫자만 보여줘서, 다음엔 뭘 먹어야 할지 모르고.",
-  "앱은 쓰는데, 정작 해결은 안 됐어요.",
+  { text: "매번 입력하다 지치면, 그만두게 돼요.", tone: "default" },
+  { text: "외식하는 날엔, 식단은 잠깐 공백이 되고.", tone: "soft" },
+  { text: "칼로리 숫자는 보이는데, 다음에 뭘 먹을지는 안 보여요.", tone: "default" },
+  { text: "앱은 켜는데, 정작 선택의 순간엔 여전히 혼자예요.", tone: "emphasis" },
 ];
 
 /**
- * useInView + stagger로 문장 순차 등장. 스크롤 progress 대비 안정적.
+ * Typography-led scene: each line is a scroll "beat" with distinct weight.
  */
 export default function ProblemEmpathy() {
-  const ref = useRef(null);
   const reduceMotion = useReducedMotion();
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "0px 0px 80px 0px",
-    amount: 0.15,
-  });
 
   if (reduceMotion) {
     return (
-      <section
-        className="relative bg-oat py-20 md:py-28 px-4"
-        aria-labelledby="empathy-heading"
-      >
-        <div className="max-w-2xl mx-auto text-center space-y-8 md:space-y-10">
+      <section className="scene-empathy py-20 md:py-28 px-4 md:px-6" aria-labelledby="empathy-heading">
+        <div className="max-w-3xl mx-auto space-y-10">
           <h2 id="empathy-heading" className="sr-only">
             식단 관리의 어려움
           </h2>
           {lines.map((line, i) => (
             <p
               key={i}
-              className="text-xl md:text-3xl lg:text-4xl leading-[1.5] md:leading-[1.4] text-[var(--text-primary)] font-normal"
+              className="text-2xl md:text-3xl text-[var(--text-primary)] leading-snug font-medium"
             >
-              {line}
+              {line.text}
             </p>
           ))}
         </div>
@@ -44,49 +35,66 @@ export default function ProblemEmpathy() {
   }
 
   return (
-    <section
-      ref={ref}
-      className="relative bg-oat min-h-[100vh] py-20 md:py-28 px-4 flex items-center justify-center"
-      aria-labelledby="empathy-heading"
-    >
+    <section className="scene-empathy relative overflow-hidden py-20 md:py-28" aria-labelledby="empathy-heading">
       <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden
-      >
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-[var(--accent-blush)]/30 blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[300px] rounded-full bg-[var(--accent-leaf)]/5 blur-3xl" />
-      </div>
-
-      <motion.div
-        className="max-w-2xl mx-auto text-center relative z-10"
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={{
-          visible: {
-            transition: { staggerChildren: 0.22, delayChildren: 0.1 },
-          },
-          hidden: {},
+        className="pointer-events-none absolute top-0 right-0 w-[min(80vw,520px)] h-[min(80vw,520px)] rounded-full opacity-30"
+        style={{
+          background: "radial-gradient(circle, rgba(127,176,105,0.12) 0%, transparent 70%)",
         }}
-      >
-        <h2 id="empathy-heading" className="sr-only">
-          식단 관리의 어려움
-        </h2>
-        <div className="space-y-12 md:space-y-16 lg:space-y-20">
-          {lines.map((line, i) => (
-            <motion.p
-              key={i}
-              variants={{
-                hidden: { opacity: 0, y: 24 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1] }}
-              className="text-xl md:text-3xl lg:text-4xl leading-[1.5] md:leading-[1.4] text-[var(--text-primary)] font-normal"
-            >
-              {line}
-            </motion.p>
-          ))}
-        </div>
-      </motion.div>
+        aria-hidden
+      />
+      <h2 id="empathy-heading" className="sr-only">
+        식단 관리의 어려움
+      </h2>
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        {lines.map((line, i) => (
+          <EmpathyBeat key={i} line={line} index={i} beatNum={String(i + 1).padStart(2, "0")} />
+        ))}
+      </div>
     </section>
+  );
+}
+
+function EmpathyBeat({ line, index, beatNum }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20% 0px -15% 0px", amount: 0.45 });
+
+  const sizeClass =
+    line.tone === "emphasis"
+      ? "text-3xl sm:text-4xl md:text-5xl lg:text-[3.35rem] font-semibold text-[var(--accent-forest)]"
+      : line.tone === "soft"
+      ? "text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] font-medium text-[var(--text-secondary)]"
+      : "text-2xl sm:text-3xl md:text-4xl lg:text-[2.95rem] font-medium text-[var(--text-primary)]";
+
+  return (
+    <div
+      ref={ref}
+      className="min-h-[min(55vh,520px)] md:min-h-[min(60vh,560px)] grid md:grid-cols-[minmax(4rem,5.5rem)_1fr] gap-6 md:gap-10 items-center py-16 md:py-20 border-b border-[var(--accent-forest)]/[0.07] last:border-0"
+    >
+      <div className="hidden md:flex flex-col items-center gap-4 pt-1 self-stretch">
+        <span
+          className="text-[2.75rem] lg:text-[3.25rem] font-light tabular-nums text-[var(--accent-leaf)]/22 leading-none select-none"
+          aria-hidden
+        >
+          {beatNum}
+        </span>
+        <span className="w-px grow min-h-[4rem] max-h-[8rem] bg-gradient-to-b from-[var(--accent-leaf)]/40 to-transparent" aria-hidden />
+      </div>
+      <motion.p
+        initial={{ opacity: 0, y: 48, filter: "blur(8px)" }}
+        animate={
+          isInView
+            ? { opacity: 1, y: 0, filter: "blur(0px)" }
+            : { opacity: 0, y: 48, filter: "blur(8px)" }
+        }
+        transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
+        className={`${sizeClass} leading-[1.22] tracking-[-0.02em] text-balance max-w-[22ch] md:max-w-[32ch] md:border-l md:border-[var(--accent-leaf)]/12 md:pl-10`}
+      >
+        <span className="md:hidden text-[10px] font-bold text-[var(--accent-leaf)]/50 tracking-[0.2em] uppercase block mb-3">
+          {beatNum}
+        </span>
+        {line.text}
+      </motion.p>
+    </div>
   );
 }

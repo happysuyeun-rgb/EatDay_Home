@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 const scenarios = [
   {
@@ -33,68 +32,70 @@ const scenarios = [
 ];
 
 export default function RealLifeScenarios() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px", amount: 0.1 });
-
   return (
-    <section ref={ref} className="py-24 md:py-32 px-4 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-2xl md:text-3xl font-bold text-center mb-4 text-[var(--text-primary)]"
+    <section
+      className="relative py-28 md:py-36 px-4 md:px-6 overflow-hidden scene-scenarios"
+    >
+      <div className="max-w-[1200px] mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-xs font-semibold text-[var(--accent-leaf)] tracking-[0.2em] uppercase mb-6 text-center"
         >
-          이런 상황에서 쓰고 있어요
+          사용 맥락
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="text-3xl sm:text-4xl md:text-[2.65rem] font-bold text-center mb-5 text-[var(--text-primary)] tracking-[-0.02em] text-balance max-w-3xl mx-auto leading-[1.12]"
+        >
+          이런 상황에서
+          <br />
+          <span className="text-[var(--accent-forest)]">쓰고 있어요</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1 }}
-          className="text-[var(--text-secondary)] text-center mb-12 max-w-xl mx-auto"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.08 }}
+          className="text-lg text-[var(--text-secondary)] text-center mb-14 md:mb-16 max-w-lg mx-auto"
         >
           익숙한 일상 속에서 잇데이를 어떻게 쓰는지.
         </motion.p>
 
-        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible md:pb-0 scrollbar-hide">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {scenarios.map((s, i) => (
-            <motion.div
+            <motion.article
               key={s.id}
-              initial={{ opacity: 0, y: 20, scale: 0.96 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{
-                delay: 0.15 + i * 0.08,
-                duration: 0.45,
-                ease: [0.22, 0.61, 0.36, 1],
+                delay: 0.1 + i * 0.07,
+                duration: 0.55,
+                ease: [0.16, 1, 0.3, 1],
               }}
-              whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.2 } }}
-              className="shrink-0 w-[280px] md:w-auto snap-center rounded-2xl bg-white p-6 shadow-[var(--shadow)] border border-[var(--border)] cursor-default relative overflow-hidden group"
+              whileHover={{ y: -8, transition: { duration: 0.25 } }}
+              className="group rounded-2xl p-6 md:p-7 bg-gradient-to-b from-sand/80 to-oat/40 border border-black/[0.06] hover:border-[var(--accent-leaf)]/25 hover:shadow-[0_20px_50px_rgba(74,124,89,0.1)] transition-all duration-300 cursor-default flex flex-col min-h-[280px]"
             >
-              <h3 className="font-semibold text-[var(--text-primary)] mb-1.5">
-                {s.title}
-              </h3>
-              <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
+              <h3 className="font-bold text-lg text-[var(--text-primary)] mb-2">{s.title}</h3>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6 flex-1">
                 {s.situation}
               </p>
 
-              {/* Mini overlay */}
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 + i * 0.08 }}
-                className="rounded-xl bg-oat/80 border border-[var(--border)] p-3"
-              >
+              <div className="rounded-xl bg-white/70 backdrop-blur-sm border border-black/[0.06] p-4 mt-auto shadow-sm group-hover:bg-white transition-colors">
                 <MiniOverlay type={s.overlay} label={s.overlayLabel} />
-              </motion.div>
+              </div>
 
               <a
                 href="https://eatday.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block text-xs font-medium text-[var(--accent-leaf)] hover:underline"
+                className="mt-5 text-sm font-semibold text-[var(--accent-leaf)] inline-flex items-center gap-1 hover:gap-2 transition-all"
               >
-                시작하기 →
+                시작하기
+                <span aria-hidden>→</span>
               </a>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>
@@ -105,50 +106,44 @@ export default function RealLifeScenarios() {
 function MiniOverlay({ type, label }) {
   if (type === "map") {
     return (
-      <div className="flex items-center gap-2">
-        <div className="w-8 h-8 rounded-lg bg-[var(--accent-leaf)]/20 flex items-center justify-center shrink-0">
-          <span className="w-2 h-2 rounded-full bg-[var(--accent-leaf)]" />
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-lg bg-[var(--accent-leaf)]/20 flex items-center justify-center shrink-0">
+          <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-leaf)]" />
         </div>
-        <p className="text-xs font-medium text-[var(--text-primary)] truncate">
-          {label}
-        </p>
+        <p className="text-sm font-semibold text-[var(--text-primary)] leading-tight">{label}</p>
       </div>
     );
   }
   if (type === "search") {
     return (
-      <div className="space-y-1">
-        <div className="h-1.5 rounded bg-[var(--border)] w-3/4" />
-        <p className="text-xs font-medium text-[var(--accent-leaf)] truncate">
-          {label}
-        </p>
+      <div className="space-y-2">
+        <div className="h-2 rounded-md bg-black/[0.06] w-4/5" />
+        <p className="text-sm font-semibold text-[var(--accent-leaf)]">{label}</p>
       </div>
     );
   }
   if (type === "macro") {
     return (
       <div className="space-y-2">
-        <div className="h-1.5 rounded-full bg-oat overflow-hidden">
+        <div className="h-2.5 rounded-full bg-oat overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "68%" }}
-            transition={{ delay: 0.6, duration: 0.5 }}
+            transition={{ delay: 0.5, duration: 0.55 }}
             className="h-full rounded-full bg-[var(--accent-leaf)]"
           />
         </div>
-        <p className="text-xs font-medium text-[var(--text-primary)]">{label}</p>
+        <p className="text-sm font-semibold text-[var(--text-primary)]">{label}</p>
       </div>
     );
   }
   if (type === "menu") {
     return (
-      <div className="flex items-center gap-2">
-        <div className="w-6 h-6 rounded bg-[var(--accent-lime)]/30 shrink-0" />
-        <p className="text-xs font-medium text-[var(--text-primary)] truncate">
-          {label}
-        </p>
+      <div className="flex items-center gap-3">
+        <div className="w-8 h-8 rounded-lg bg-[var(--accent-lime)]/35 shrink-0" />
+        <p className="text-sm font-semibold text-[var(--text-primary)] leading-tight">{label}</p>
       </div>
     );
   }
-  return <p className="text-xs">{label}</p>;
+  return <p className="text-sm font-medium">{label}</p>;
 }

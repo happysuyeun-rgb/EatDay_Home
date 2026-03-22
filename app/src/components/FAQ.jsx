@@ -31,21 +31,45 @@ const items = [
 
 export default function FAQ() {
   const [open, setOpen] = useState(null);
-
   return (
-    <section id="faq" className="py-24 md:py-32 bg-oat px-4" aria-labelledby="faq-heading">
-      <div className="max-w-2xl mx-auto">
-        <h2 id="faq-heading" className="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16 text-[var(--text-primary)]">
+    <section
+      id="faq"
+      className="relative py-28 md:py-36 px-4 md:px-6 scene-faq"
+      aria-labelledby="faq-heading"
+    >
+      <div className="max-w-3xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-xs font-semibold text-[var(--accent-leaf)] tracking-[0.2em] uppercase mb-6 text-center"
+        >
+          FAQ
+        </motion.p>
+        <motion.h2
+          id="faq-heading"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-3xl md:text-4xl font-bold text-center mb-4 text-[var(--text-primary)] tracking-[-0.02em]"
+        >
           궁금한 게 있으신가요?
-        </h2>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.08 }}
+          className="text-center text-[var(--text-secondary)] mb-14 md:mb-16"
+        >
+          자주 묻는 질문만 골라 담았어요.
+        </motion.p>
 
-        <div className="space-y-3" role="list">
+        <div className="space-y-0 border-t border-black/[0.08]" role="list">
           {items.map((item, i) => {
             const isOpen = open === i;
             return (
               <div
                 key={item.id}
-                className="rounded-2xl bg-white border border-[var(--border)] shadow-[var(--shadow)] overflow-hidden"
+                className="border-b border-black/[0.08]"
                 role="listitem"
               >
                 <h3>
@@ -54,16 +78,18 @@ export default function FAQ() {
                     aria-expanded={isOpen}
                     aria-controls={`${item.id}-panel`}
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 py-5 px-6 text-left font-medium text-[var(--text-primary)] hover:text-[var(--accent-leaf)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-leaf)] focus-visible:ring-offset-2 rounded-2xl"
+                    className="w-full flex items-start justify-between gap-6 py-6 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-leaf)] focus-visible:ring-offset-4 rounded-lg"
                   >
-                    <span>{item.q}</span>
+                    <span className="text-base md:text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-forest)] transition-colors pr-4">
+                      {item.q}
+                    </span>
                     <motion.span
-                      animate={{ rotate: isOpen ? 180 : 0 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                      className="shrink-0 w-8 h-8 rounded-full bg-oat flex items-center justify-center text-[var(--text-tertiary)]"
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="shrink-0 w-10 h-10 rounded-full border border-black/[0.08] flex items-center justify-center text-[var(--accent-leaf)] text-xl font-light mt-0.5"
                       aria-hidden
                     >
-                      <ChevronIcon />
+                      +
                     </motion.span>
                   </button>
                 </h3>
@@ -76,17 +102,12 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 0.61, 0.36, 1] }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <motion.p
-                        initial={{ opacity: 0, y: 4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.08, duration: 0.25 }}
-                        className="px-6 pb-6 pt-0 text-[var(--text-secondary)] text-sm md:text-base leading-relaxed"
-                      >
+                      <p className="pb-8 pr-14 text-[var(--text-secondary)] text-base leading-relaxed max-w-2xl">
                         {item.a}
-                      </motion.p>
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -96,19 +117,5 @@ export default function FAQ() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ChevronIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-      <path
-        d="M3 4.5L6 7.5L9 4.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

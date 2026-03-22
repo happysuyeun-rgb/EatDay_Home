@@ -5,10 +5,10 @@ export default function Footer() {
 
   return (
     <footer
-      className="py-16 md:py-20 px-4 bg-oat/50 border-t border-[var(--border)]"
+      className="py-16 md:py-20 px-4 md:px-6 bg-cream border-t border-black/[0.06]"
       role="contentinfo"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 md:gap-8">
           {/* Brand */}
           <div className="space-y-2">
