@@ -61,7 +61,7 @@ section
 
 ## E. Code Reference
 
-- `landing-react/src/components/RealLifeScenarios.jsx`
+- `app/src/components/RealLifeScenarios.jsx`
 
 ---
 

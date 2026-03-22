@@ -84,7 +84,7 @@ BeforeAfter
 
 ## E. Code Reference
 
-- `landing-react/src/components/BeforeAfter.jsx`
+- `app/src/components/BeforeAfter.jsx`
 
 ---
 

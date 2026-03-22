@@ -10,7 +10,7 @@ High-End Glassmorphism & Minimal High-Tech 디자인 컨셉의 랜딩 페이지�
 ## 실행 방법
 
 ```bash
-cd landing-react
+cd app
 npm install
 npm run dev
 ```

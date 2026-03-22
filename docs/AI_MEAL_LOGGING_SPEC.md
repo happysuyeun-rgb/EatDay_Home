@@ -61,7 +61,7 @@
 
 ## D. Code Reference
 
-- `landing-react/src/components/AIMealLogging.jsx`
+- `app/src/components/AIMealLogging.jsx`
 
 ---
 

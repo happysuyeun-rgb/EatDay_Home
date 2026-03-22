@@ -28,7 +28,7 @@
 
 ## C. Code Reference
 
-- `landing-react/src/components/FAQ.jsx`
+- `app/src/components/FAQ.jsx`
 
 ---
 

@@ -51,7 +51,7 @@ section
 
 ## E. Code Reference
 
-- `landing-react/src/components/ColiWarmth.jsx`
+- `app/src/components/ColiWarmth.jsx`
 
 ---
 

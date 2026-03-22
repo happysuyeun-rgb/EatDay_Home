@@ -5,7 +5,7 @@
 ## A. File Structure
 
 ```
-landing-react/
+app/
 ├── public/
 │   └── assets/
 │       └── coree.png

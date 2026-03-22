@@ -67,7 +67,7 @@ section#community
 
 ## E. Code Reference
 
-- `landing-react/src/components/CommunityReport.jsx`
+- `app/src/components/CommunityReport.jsx`
 
 ---
 

@@ -32,7 +32,7 @@ footer
 
 ## C. Code Reference
 
-- `landing-react/src/components/Footer.jsx`
+- `app/src/components/Footer.jsx`
 
 ---
 

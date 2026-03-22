@@ -57,7 +57,7 @@ section#map
 
 ## E. Code Reference
 
-- `landing-react/src/components/RestaurantMap.jsx`
+- `app/src/components/RestaurantMap.jsx`
 
 ---
 

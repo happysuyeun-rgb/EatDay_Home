@@ -75,7 +75,7 @@ section
 
 ## E. Code Reference
 
-- `landing-react/src/components/ActionableFeedback.jsx`
+- `app/src/components/ActionableFeedback.jsx`
 
 ---
 

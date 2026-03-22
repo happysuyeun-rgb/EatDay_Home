@@ -71,8 +71,8 @@ Hero
 
 ## D. Code Reference
 
-- `landing-react/src/components/Header.jsx`
-- `landing-react/src/components/Hero.jsx`
+- `app/src/components/Header.jsx`
+- `app/src/components/Hero.jsx`
 
 ---
 

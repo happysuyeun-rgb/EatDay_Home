@@ -54,7 +54,7 @@ section (min-h: 250vh mobile, 320vh desktop)
 
 ## D. Code Reference
 
-- `landing-react/src/components/ProblemEmpathy.jsx`
+- `app/src/components/ProblemEmpathy.jsx`
 
 ---
 

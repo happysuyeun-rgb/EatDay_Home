@@ -51,7 +51,7 @@ section
 
 ## E. Code Reference
 
-- `landing-react/src/components/FinalCTA.jsx`
+- `app/src/components/FinalCTA.jsx`
 
 ---
 
