@@ -1,15 +1,20 @@
 import { Link } from "react-router-dom";
+import { LOGO_SRC } from "../constants/eatday";
 
 export default function LegalLayout({ title, children }) {
   return (
     <div className="min-h-screen bg-cream">
       <header className="border-b border-[var(--border)] bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-          <Link
-            to="/"
-            className="font-semibold text-[var(--text-primary)] hover:text-[var(--accent-leaf)] transition-colors shrink-0"
-          >
-            EATDAY
+          <Link to="/" className="shrink-0 block leading-none" aria-label="EATDAY 홈">
+            <img
+              src={LOGO_SRC}
+              alt=""
+              className="h-8 w-auto max-w-[140px] object-contain"
+              width={148}
+              height={32}
+              decoding="async"
+            />
           </Link>
           <nav className="hidden sm:flex items-center gap-6" aria-label="법적 문서">
             <Link

@@ -5,7 +5,7 @@ import Privacy from "./pages/Privacy";
 
 function App() {
   return (
-    <div className="min-h-screen overflow-x-clip bg-cream">
+    <div className="min-h-screen overflow-x-clip">
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/terms" element={<Terms />} />

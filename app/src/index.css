@@ -26,10 +26,15 @@ html {
   scroll-behavior: smooth;
 }
 
+#root {
+  min-height: 100%;
+}
+
+/* prefers-reduced-motion: 전역 * !important 는 랜딩 커스텀 CSS·전환과 충돌할 수 있음.
+   랜딩은 eatday-landing.css, 법적 페이지는 필요 시 컴포넌트 단에서 처리 */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  html {
+    scroll-behavior: auto;
   }
 }
 
@@ -46,104 +51,6 @@ body {
   color: var(--text-primary);
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-/* Scene: hero spotlight */
-.scene-hero-glow {
-  background:
-    radial-gradient(ellipse 90% 70% at 85% 35%, rgba(127, 176, 105, 0.16) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(232, 222, 213, 0.55) 0%, transparent 50%),
-    var(--bg-cream);
-}
-
-/* Scene: empathy — editorial, slightly moody */
-.scene-empathy {
-  background:
-    linear-gradient(180deg, rgba(45, 90, 61, 0.055) 0%, transparent 38%),
-    linear-gradient(180deg, transparent 62%, rgba(232, 222, 213, 0.42) 100%),
-    var(--bg-oat);
-  /* Cream “roll-in” from hero */
-  box-shadow: inset 0 100px 80px -80px rgba(250, 249, 247, 0.92);
-}
-
-/* Before/after: diagonal sand slab — desktop only */
-.scene-features {
-  background: var(--bg-cream);
-}
-@media (min-width: 768px) {
-  .scene-features {
-    background:
-      linear-gradient(
-        108deg,
-        var(--bg-sand) 0%,
-        var(--bg-sand) 34%,
-        var(--bg-cream) 34.15%,
-        var(--bg-cream) 100%
-      );
-  }
-}
-
-/* AI logging: sharper product “stage light” */
-.scene-ai-meal {
-  background:
-    radial-gradient(ellipse 85% 90% at 0% 45%, rgba(127, 176, 105, 0.14) 0%, transparent 52%),
-    radial-gradient(ellipse 50% 40% at 100% 20%, rgba(232, 222, 213, 0.35) 0%, transparent 55%),
-    var(--bg-oat);
-  box-shadow: inset 0 1px 0 rgba(74, 124, 89, 0.06);
-}
-
-/* Feedback: calm vignette, card feels lit */
-.scene-feedback {
-  background:
-    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(74, 124, 89, 0.09) 0%, transparent 58%),
-    radial-gradient(ellipse 60% 50% at 0% 0%, rgba(45, 90, 61, 0.04) 0%, transparent 45%),
-    var(--bg-cream);
-}
-
-/* Community: warm paper + subtle edge */
-.scene-community {
-  background:
-    linear-gradient(180deg, rgba(250, 249, 247, 0.85) 0%, transparent 28%),
-    radial-gradient(ellipse 70% 50% at 100% 50%, rgba(232, 222, 213, 0.5) 0%, transparent 55%),
-    var(--bg-oat);
-  border-top: 1px solid rgba(74, 124, 89, 0.07);
-}
-
-/* Scenarios: mist band + asymmetry hint */
-.scene-scenarios {
-  background:
-    linear-gradient(180deg, var(--bg-mist) 0%, transparent 22%),
-    linear-gradient(92deg, transparent 0%, rgba(127, 176, 105, 0.04) 50%, transparent 100%),
-    var(--bg-cream);
-}
-
-/* Coli interlude: narrow spotlight */
-.scene-coli {
-  background:
-    radial-gradient(ellipse 55% 70% at 50% 45%, rgba(127, 176, 105, 0.11) 0%, transparent 62%),
-    linear-gradient(180deg, var(--bg-mist) 0%, var(--bg-oat) 100%);
-}
-
-/* FAQ: crisp “closing chapter” */
-.scene-faq {
-  background:
-    linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-oat) 100%);
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-/* Scene: map feature */
-.scene-map {
-  background:
-    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(74, 124, 89, 0.11) 0%, transparent 50%),
-    linear-gradient(180deg, #ebe7e0 0%, var(--bg-sand) 45%, var(--bg-sand) 100%);
-  box-shadow: inset 0 80px 70px -70px rgba(250, 249, 247, 0.65);
-}
-
-/* Scene: CTA climax */
-.scene-cta {
-  background:
-    radial-gradient(ellipse 100% 90% at 50% 120%, rgba(74, 124, 89, 0.18) 0%, transparent 55%),
-    linear-gradient(180deg, var(--bg-oat) 0%, #f6f4ef 100%);
 }
 
 @layer utilities {

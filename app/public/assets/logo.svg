@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 44" fill="none" role="img" aria-labelledby="eatday-logo-title">
+  <title id="eatday-logo-title">EATDAY</title>
+  <text
+    x="110"
+    y="32"
+    text-anchor="middle"
+    font-family="Nunito, 'Noto Sans KR', system-ui, sans-serif"
+    font-size="28"
+    font-weight="900"
+    fill="#4CAF50"
+  >EATDAY</text>
+</svg>
