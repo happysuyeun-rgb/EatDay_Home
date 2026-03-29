@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { EATDAY_BETA_URL, LOGO_SRC } from "../constants/eatday";
+import { BETA_COMING_SOON_ALERT, LOGO_SRC } from "../constants/eatday";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,14 +27,13 @@ export default function Nav() {
           decoding="async"
         />
       </Link>
-      <a
-        href={EATDAY_BETA_URL}
+      <button
+        type="button"
         className="nav-cta"
-        target="_blank"
-        rel="noopener noreferrer"
+        onClick={() => window.alert(BETA_COMING_SOON_ALERT)}
       >
         베타 사전등록
-      </a>
+      </button>
     </nav>
   );
 }

@@ -1,4 +1,4 @@
-import { EATDAY_BETA_URL, HERO_COLLY_SRC } from "../constants/eatday";
+import { BETA_COMING_SOON_ALERT, HERO_COLLY_SRC } from "../constants/eatday";
 import { useReveal } from "../hooks/useReveal";
 
 export default function CtaSection() {
@@ -16,20 +16,15 @@ export default function CtaSection() {
         height={120}
         decoding="async"
       />
-      <h2 className="cta-title">
-        오늘부터 같이
-        <br />
-        기록해봐요! 🌿
-      </h2>
+      <h2 className="cta-title">오늘부터 같이 기록해봐요! 🌿</h2>
       <p className="cta-sub">무료 베타 · 사진 인식 10회/월 무료 · 광고 없음</p>
-      <a
-        href={EATDAY_BETA_URL}
+      <button
+        type="button"
         className="btn-white"
-        target="_blank"
-        rel="noopener noreferrer"
+        onClick={() => window.alert(BETA_COMING_SOON_ALERT)}
       >
         🍎 베타 사전등록 무료로 시작
-      </a>
+      </button>
       <p className="cta-note">지금 사전등록하면 베타 알림을 가장 먼저 받을 수 있어요</p>
     </div>
   );

@@ -1,4 +1,4 @@
-import { MASCOT_SRC } from "../constants/eatday";
+import { COLLY_FLOW_SRC } from "../constants/eatday";
 import { useReveal } from "../hooks/useReveal";
 
 export default function Solution() {
@@ -9,32 +9,15 @@ export default function Solution() {
       <div className="section-tag">✨ 잇데이의 방법</div>
       <div className="solution-wrap">
         <img
-          src={MASCOT_SRC}
-          alt="잇데이 마스코트"
-          width={100}
-          height={100}
+          src={COLLY_FLOW_SRC}
+          alt="잇데이 콜리 — 찍고, 고르고, 끝"
+          className="solution-colly-img"
+          width={320}
+          height={200}
           decoding="async"
-          style={{
-            width: 100,
-            height: 100,
-            display: "block",
-            margin: "0 auto 16px",
-            filter: "drop-shadow(0 8px 20px rgba(76,175,80,0.2))",
-          }}
         />
-        <h2 className="section-title" style={{ textAlign: "center" }}>
-          찍고 → 고르고 → 끝
-        </h2>
-        <p
-          style={{
-            textAlign: "center",
-            color: "var(--text2)",
-            fontSize: 15,
-            marginTop: 8,
-          }}
-        >
-          AI가 top-3 후보를 추천하면, 탭 한 번으로 기록 완료!
-        </p>
+        <h2 className="section-title">찍고 → 고르고 → 끝</h2>
+        <p className="section-sub">AI가 top-3 후보를 추천하면, 탭 한 번으로 기록 완료!</p>
 
         <div className="flow-steps">
           <div className="flow-step">

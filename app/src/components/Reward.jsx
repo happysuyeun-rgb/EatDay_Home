@@ -79,48 +79,44 @@ export default function Reward() {
   }, []);
 
   return (
-    <section ref={revealRef} className="section reveal">
+    <section ref={revealRef} className="section section-reward reveal">
       <div className="section-tag">🎁 연속기록 보상박스</div>
-      <div className="reward-bg">
-        <h2 className="section-title">
-          기록할수록
-          <br />
-          쌓이는 보상 🎉
-        </h2>
-        <p className="section-sub">
-          의무감 말고 기대감으로 — 상자를 열어보고 싶어서 기록하게 돼요
-        </p>
-        <div className="reward-grid">
-          {TIERS.map((t) => (
-            <div
-              key={t.cls}
-              ref={t.cls === "gold" ? goldRef : undefined}
-              role="button"
-              tabIndex={0}
-              aria-pressed={opened.has(t.cls)}
-              aria-label={`${t.name} 보상 — ${opened.has(t.cls) ? "열림" : "닫힘"}`}
-              className={`reward-card ${t.cls}${opened.has(t.cls) ? " opened" : ""}${
-                bouncingCls === t.cls ? " reward-bouncing" : ""
-              }`}
-              onClick={() => toggleTier(t)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  toggleTier(t);
-                }
-              }}
-            >
-              <div className="reward-emoji">{t.emoji}</div>
-              <div className="reward-name">{t.name}</div>
-              <div className="reward-days">{t.days}</div>
-              <ul className="reward-perks">
-                {t.perks.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+      <h2 className="section-title reward-title-line">
+        기록할수록 쌓이는 보상 🎉
+      </h2>
+      <p className="section-sub">
+        의무감 말고 기대감으로 — 상자를 열어보고 싶어서 기록하게 돼요
+      </p>
+      <div className="reward-grid">
+        {TIERS.map((t) => (
+          <div
+            key={t.cls}
+            ref={t.cls === "gold" ? goldRef : undefined}
+            role="button"
+            tabIndex={0}
+            aria-pressed={opened.has(t.cls)}
+            aria-label={`${t.name} 보상 — ${opened.has(t.cls) ? "열림" : "닫힘"}`}
+            className={`reward-card ${t.cls}${opened.has(t.cls) ? " opened" : ""}${
+              bouncingCls === t.cls ? " reward-bouncing" : ""
+            }`}
+            onClick={() => toggleTier(t)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggleTier(t);
+              }
+            }}
+          >
+            <div className="reward-emoji">{t.emoji}</div>
+            <div className="reward-name">{t.name}</div>
+            <div className="reward-days">{t.days}</div>
+            <ul className="reward-perks">
+              {t.perks.map((p) => (
+                <li key={p}>{p}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </section>
   );

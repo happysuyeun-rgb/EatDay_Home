@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { EATDAY_BETA_URL, HERO_COLLY_SRC } from "../constants/eatday";
+import { BETA_COMING_SOON_ALERT, HERO_COLLY_SRC } from "../constants/eatday";
 
 export default function Hero() {
   const [bouncing, setBouncing] = useState(false);
@@ -55,22 +55,13 @@ export default function Hero() {
       </p>
 
       <div className="hero-actions">
-        <a
-          href={EATDAY_BETA_URL}
+        <button
+          type="button"
           className="btn-primary"
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={() => window.alert(BETA_COMING_SOON_ALERT)}
         >
           🍎 베타 사전등록 무료로 시작
-        </a>
-        <a
-          href={EATDAY_BETA_URL}
-          className="btn-secondary"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          앱 미리보기 →
-        </a>
+        </button>
       </div>
 
       <div className="hero-stats">
