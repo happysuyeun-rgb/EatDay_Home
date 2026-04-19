@@ -851,19 +851,13 @@
 .feat-icon {
   width: 56px;
   height: 56px;
-  border-radius: 18px;
-  background: var(--green-light);
+  border-radius: 0;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 26px;
   margin-bottom: 16px;
-  border: 1.5px solid #c8e6c9;
-}
-
-/* AI 사진 인식: 아이콘만 두고 박스 스타일 제거 */
-.features-grid .feat-card:first-child .feat-icon {
-  background: transparent;
   border: none;
 }
 
