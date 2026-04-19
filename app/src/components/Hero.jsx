@@ -85,21 +85,6 @@ export default function Hero() {
           🍎 베타 사전등록 무료로 시작
         </button>
       </div>
-
-      <div className="hero-stats">
-        <div className="hero-stat">
-          <div className="num">3탭</div>
-          <div className="label">식단 기록 완료</div>
-        </div>
-        <div className="hero-stat">
-          <div className="num">87%</div>
-          <div className="label">개발 완료</div>
-        </div>
-        <div className="hero-stat">
-          <div className="num">2종</div>
-          <div className="label">공공데이터 결합</div>
-        </div>
-      </div>
     </section>
   );
 }
