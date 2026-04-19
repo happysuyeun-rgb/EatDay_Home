@@ -848,6 +848,7 @@
   }
 }
 
+/* 핵심 기능 카드: 아이콘만 표시(연두 박스 없음). 카드(.feat-card) 흰 배경·테두리는 유지 */
 .feat-icon {
   width: 56px;
   height: 56px;
@@ -859,6 +860,15 @@
   font-size: 26px;
   margin-bottom: 16px;
   border: none;
+  box-shadow: none;
+}
+
+/* 랜딩 스코프로 우선 적용(다른 시트·순서와 겹쳐도 아이콘 박스만 제거 유지) */
+.eatday-landing .features-grid .feat-card .feat-icon {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .feat-title {

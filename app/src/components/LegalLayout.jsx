@@ -1,5 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { LOGO_SRC } from "../constants/eatday";
+import ScrollToTopButton from "./ScrollToTopButton";
+
+function legalNavLinkClass({ isActive }) {
+  return [
+    "text-sm transition-colors rounded-full px-3 py-1.5 outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-leaf)] focus-visible:ring-offset-2",
+    isActive
+      ? "font-semibold text-[var(--accent-leaf)] bg-[var(--bg-mist)] shadow-sm"
+      : "font-medium text-[var(--text-secondary)] hover:text-[var(--accent-leaf)] hover:bg-black/[0.04]",
+  ].join(" ");
+}
 
 export default function LegalLayout({ title, children }) {
   const showHeading = title != null && title !== "";
@@ -18,19 +28,13 @@ export default function LegalLayout({ title, children }) {
               decoding="async"
             />
           </Link>
-          <nav className="hidden sm:flex items-center gap-6" aria-label="법적 문서">
-            <Link
-              to="/terms"
-              className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent-leaf)] transition-colors"
-            >
+          <nav className="hidden sm:flex items-center gap-2" aria-label="법적 문서">
+            <NavLink to="/terms" className={legalNavLinkClass} end>
               이용약관
-            </Link>
-            <Link
-              to="/privacy"
-              className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent-leaf)] transition-colors"
-            >
+            </NavLink>
+            <NavLink to="/privacy" className={legalNavLinkClass} end>
               개인정보처리방침
-            </Link>
+            </NavLink>
           </nav>
           <Link
             to="/"
@@ -72,6 +76,7 @@ export default function LegalLayout({ title, children }) {
           </p>
         </div>
       </footer>
+      <ScrollToTopButton />
     </div>
   );
 }
