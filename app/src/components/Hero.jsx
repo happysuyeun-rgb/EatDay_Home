@@ -1,8 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { BETA_COMING_SOON_ALERT, HERO_COLLY_SRC } from "../constants/eatday";
+import { useTypingTitle } from "../hooks/useTypingTitle";
+
+const HERO_TITLE_FULL = "식단 기록,\n사진 한 장으로 끝";
 
 export default function Hero() {
   const [bouncing, setBouncing] = useState(false);
+  const heroTypingRef = useRef(null);
+  const { typedTitle, typingDone } = useTypingTitle(HERO_TITLE_FULL, heroTypingRef);
 
   const onMascotActivate = useCallback(() => {
     setBouncing(true);
@@ -10,7 +15,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="hero" aria-labelledby="eatday-hero-title">
+    <section ref={heroTypingRef} className="hero" aria-labelledby="eatday-hero-title">
       <div className="hero-bg-circle c1" aria-hidden />
       <div className="hero-bg-circle c2" aria-hidden />
 
@@ -42,10 +47,27 @@ export default function Hero() {
         </div>
       </div>
 
-      <h1 id="eatday-hero-title" className="hero-title">
-        식단 기록,
-        <br />
-        <span className="highlight">사진 한 장</span>으로 끝
+      <h1
+        id="eatday-hero-title"
+        className="hero-title solution-title-typing"
+        aria-label={HERO_TITLE_FULL.replace(/\n/g, " ")}
+      >
+        {typingDone ? (
+          <>
+            식단 기록,
+            <br />
+            <span className="highlight">사진 한 장</span>으로 끝
+          </>
+        ) : (
+          <>
+            <span className="solution-title-typing-text hero-title-typing-pre">
+              {typedTitle}
+            </span>
+            <span className="solution-title-cursor hero-title-cursor" aria-hidden>
+              |
+            </span>
+          </>
+        )}
       </h1>
 
       <p className="hero-sub">

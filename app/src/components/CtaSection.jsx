@@ -1,22 +1,28 @@
-import { BETA_COMING_SOON_ALERT, HERO_COLLY_SRC } from "../constants/eatday";
+import { BETA_COMING_SOON_ALERT } from "../constants/eatday";
 import { useReveal } from "../hooks/useReveal";
+import { useTypingTitle } from "../hooks/useTypingTitle";
+
+const CTA_TITLE_FULL = "오늘부터 같이 기록해봐요! 🌿";
 
 export default function CtaSection() {
   const revealRef = useReveal();
+  const { typedTitle, typingDone } = useTypingTitle(CTA_TITLE_FULL, revealRef);
 
   return (
     <div ref={revealRef} className="cta-section reveal">
       <div className="cta-deco d1" aria-hidden />
       <div className="cta-deco d2" aria-hidden />
-      <img
-        src={HERO_COLLY_SRC}
-        alt="잇데이 콜리"
-        className="cta-mascot cta-mascot--colly"
-        width={200}
-        height={120}
-        decoding="async"
-      />
-      <h2 className="cta-title">오늘부터 같이 기록해봐요! 🌿</h2>
+      <h2
+        className="cta-title solution-title-typing"
+        aria-label={CTA_TITLE_FULL}
+      >
+        <span className="solution-title-typing-text">{typedTitle}</span>
+        {!typingDone ? (
+          <span className="solution-title-cursor cta-title-cursor" aria-hidden>
+            |
+          </span>
+        ) : null}
+      </h2>
       <p className="cta-sub">무료 베타 · 사진 인식 10회/월 무료 · 광고 없음</p>
       <button
         type="button"

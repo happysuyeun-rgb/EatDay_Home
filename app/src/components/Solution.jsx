@@ -1,65 +1,52 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import { COLLY_FLOW_SRC } from "../constants/eatday";
 import { useReveal } from "../hooks/useReveal";
+import { useStaggeredReveal } from "../hooks/useStaggeredReveal";
+import { useTypingTitle } from "../hooks/useTypingTitle";
 
 const TITLE_FULL = "찍고 → 고르고 → 끝";
 
-function prefersReducedMotion() {
-  if (typeof window === "undefined") return false;
-  try {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  } catch {
-    return false;
-  }
-}
+const FLOW_SEQUENCE = [
+  {
+    kind: "step",
+    bounce: true,
+    bounceDelay: false,
+    icon: "📸",
+    label: "사진 찍기",
+    sub: "카메라 or 갤러리",
+  },
+  { kind: "arrow" },
+  {
+    kind: "step",
+    bounce: true,
+    bounceDelay: true,
+    icon: "🧠",
+    label: "AI 인식",
+    sub: "Claude Vision",
+  },
+  { kind: "arrow" },
+  {
+    kind: "step",
+    bounce: false,
+    icon: "🥗",
+    label: "top-3 추천",
+    sub: "1탭으로 확정",
+  },
+  { kind: "arrow" },
+  {
+    kind: "step",
+    bounce: false,
+    icon: "✅",
+    label: "기록 완료!",
+    sub: "영양소 자동 입력",
+  },
+];
 
 export default function Solution() {
   const revealRef = useReveal();
-  const [typedTitle, setTypedTitle] = useState(() =>
-    prefersReducedMotion() ? TITLE_FULL : ""
-  );
-  const [typingDone, setTypingDone] = useState(() => prefersReducedMotion());
-  const [typingStarted, setTypingStarted] = useState(false);
-
-  useEffect(() => {
-    const el = revealRef.current;
-    if (!el) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setTypedTitle(TITLE_FULL);
-      setTypingDone(true);
-      return;
-    }
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setTypingStarted(true);
-        }
-      },
-      { threshold: 0.25 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [revealRef]);
-
-  useEffect(() => {
-    if (!typingStarted) return;
-
-    let i = 0;
-    setTypedTitle("");
-    setTypingDone(false);
-    const id = window.setInterval(() => {
-      i += 1;
-      setTypedTitle(TITLE_FULL.slice(0, i));
-      if (i >= TITLE_FULL.length) {
-        window.clearInterval(id);
-        setTypingDone(true);
-      }
-    }, 78);
-    return () => window.clearInterval(id);
-  }, [typingStarted]);
+  const flowStaggerRef = useRef(null);
+  const { typedTitle, typingDone } = useTypingTitle(TITLE_FULL, revealRef);
+  const flowShown = useStaggeredReveal(flowStaggerRef, FLOW_SEQUENCE.length);
 
   return (
     <section ref={revealRef} className="section reveal">
@@ -86,36 +73,43 @@ export default function Solution() {
         </h2>
         <p className="section-sub">AI가 top-3 후보를 추천하면, 탭 한 번으로 기록 완료!</p>
 
-        <div className="flow-steps">
-          <div className="flow-step flow-step--bounce">
-            <div className="step-icon">📸</div>
-            <div className="step-label">사진 찍기</div>
-            <div className="step-sub">카메라 or 갤러리</div>
-          </div>
-          <div className="flow-arrow" aria-hidden>
-            ›
-          </div>
-          <div className="flow-step flow-step--bounce flow-step--bounce-delay">
-            <div className="step-icon">🧠</div>
-            <div className="step-label">AI 인식</div>
-            <div className="step-sub">Claude Vision</div>
-          </div>
-          <div className="flow-arrow" aria-hidden>
-            ›
-          </div>
-          <div className="flow-step">
-            <div className="step-icon">🥗</div>
-            <div className="step-label">top-3 추천</div>
-            <div className="step-sub">1탭으로 확정</div>
-          </div>
-          <div className="flow-arrow" aria-hidden>
-            ›
-          </div>
-          <div className="flow-step">
-            <div className="step-icon">✅</div>
-            <div className="step-label">기록 완료!</div>
-            <div className="step-sub">영양소 자동 입력</div>
-          </div>
+        <div
+          ref={flowStaggerRef}
+          className="flow-steps flow-steps--stagger"
+        >
+          {FLOW_SEQUENCE.map((item, i) => {
+            const shown = i < flowShown;
+            const shownClass = shown ? " flow-stagger-item--shown" : "";
+
+            if (item.kind === "arrow") {
+              return (
+                <div
+                  key={`arrow-${i}`}
+                  className={`flow-arrow flow-stagger-item${shownClass}`}
+                  aria-hidden
+                >
+                  ›
+                </div>
+              );
+            }
+
+            const bounceClass = item.bounce ? " flow-step--bounce" : "";
+            const delayClass =
+              item.bounce && item.bounceDelay
+                ? " flow-step--bounce-delay"
+                : "";
+
+            return (
+              <div
+                key={item.label}
+                className={`flow-step${bounceClass}${delayClass} flow-stagger-item${shownClass}`}
+              >
+                <div className="step-icon">{item.icon}</div>
+                <div className="step-label">{item.label}</div>
+                <div className="step-sub">{item.sub}</div>
+              </div>
+            );
+          })}
         </div>
 
         <div className="solution-kv">
