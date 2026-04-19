@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { LOGO_SRC } from "../constants/eatday";
 
 export default function LegalLayout({ title, children }) {
+  const showHeading = title != null && title !== "";
+
   return (
     <div className="min-h-screen bg-cream">
       <header className="border-b border-[var(--border)] bg-white/80 backdrop-blur-md sticky top-0 z-50">
@@ -39,10 +41,18 @@ export default function LegalLayout({ title, children }) {
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-4 py-16" role="main">
-        <h1 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-10">
-          {title}
-        </h1>
-        <div className="text-[var(--text-secondary)] leading-relaxed space-y-8">
+        {showHeading ? (
+          <h1 className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-10">
+            {title}
+          </h1>
+        ) : null}
+        <div
+          className={
+            showHeading
+              ? "text-[var(--text-secondary)] leading-relaxed space-y-8"
+              : "text-[var(--text-secondary)] leading-relaxed"
+          }
+        >
           {children}
         </div>
         <Link

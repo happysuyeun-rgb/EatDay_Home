@@ -1,5 +1,6 @@
 import Nav from "../components/Nav";
 import ScrollProgress from "../components/ScrollProgress";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 import Hero from "../components/Hero";
 import PainGrid from "../components/PainGrid";
 import Solution from "../components/Solution";
@@ -14,6 +15,7 @@ export default function LandingPage() {
     <div className="eatday-landing">
       <Nav />
       <ScrollProgress />
+      <ScrollToTopButton />
       <main role="main">
         <Hero />
         <PainGrid />

@@ -1,0 +1,228 @@
+/* v3 법적 문서 — 첨부 HTML 스타일을 .legal-doc 하위로 스코프 */
+
+.legal-doc {
+  font-family: "Noto Sans KR", "Pretendard", sans-serif;
+  font-size: 14px;
+  color: #333333;
+  line-height: 1.8;
+}
+
+.legal-doc .doc-header {
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #16a34a;
+}
+
+.legal-doc .doc-badge {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #1b5e20;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.legal-doc .doc-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 8px;
+}
+
+.legal-doc .doc-meta {
+  font-size: 13px;
+  color: #757575;
+}
+
+.legal-doc .doc-meta span {
+  margin-right: 16px;
+}
+
+.legal-doc .provider-box {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0 32px;
+}
+
+.legal-doc .provider-box p {
+  font-size: 13px;
+  color: #757575;
+  margin-bottom: 3px;
+}
+
+.legal-doc .toc {
+  background: #f1f8e9;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 40px;
+}
+
+.legal-doc .toc-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1b5e20;
+  margin-bottom: 12px;
+}
+
+.legal-doc .toc-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.legal-doc .toc-list li a {
+  font-size: 13px;
+  color: #2e7d32;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legal-doc .toc-list li a:hover {
+  text-decoration: underline;
+}
+
+.legal-doc .toc-list li a::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #16a34a;
+  flex-shrink: 0;
+}
+
+.legal-doc .article {
+  margin-bottom: 40px;
+  scroll-margin-top: 70px;
+}
+
+.legal-doc .article-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1b5e20;
+  margin-bottom: 14px;
+  padding-left: 12px;
+  border-left: 3px solid #16a34a;
+}
+
+.legal-doc .article-body {
+  font-size: 14px;
+  color: #333333;
+  line-height: 1.9;
+}
+
+.legal-doc .article-body p {
+  margin-bottom: 10px;
+}
+
+.legal-doc .article-body ol,
+.legal-doc .article-body ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.legal-doc .article-body li {
+  margin-bottom: 6px;
+}
+
+.legal-doc .article-body strong {
+  color: #212121;
+  font-weight: 600;
+}
+
+.legal-doc .highlight-box {
+  background: #e8f5e9;
+  border-left: 3px solid #16a34a;
+  padding: 14px 16px;
+  border-radius: 0 6px 6px 0;
+  margin: 12px 0;
+  font-size: 13px;
+  color: #1b5e20;
+  font-weight: 500;
+}
+
+.legal-doc .warn-box {
+  background: #fff7ed;
+  border-left: 3px solid #ea580c;
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+  margin: 12px 0;
+  font-size: 13px;
+  color: #ea580c;
+}
+
+.legal-doc .info-box {
+  background: #eff6ff;
+  border-left: 3px solid #1d4ed8;
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+  margin: 12px 0;
+  font-size: 13px;
+  color: #1d4ed8;
+}
+
+.legal-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0;
+}
+
+.legal-doc th {
+  background: #2e7d32;
+  color: #fff;
+  padding: 9px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.legal-doc td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.legal-doc tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+.legal-doc .contact-box {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-top: 40px;
+}
+
+.legal-doc .contact-box h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 10px;
+}
+
+.legal-doc .contact-box p {
+  font-size: 13px;
+  color: #757575;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 600px) {
+  .legal-doc .toc-list {
+    grid-template-columns: 1fr;
+  }
+
+  .legal-doc .doc-title {
+    font-size: 20px;
+  }
+}

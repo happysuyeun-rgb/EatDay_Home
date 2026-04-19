@@ -69,6 +69,55 @@
   pointer-events: none;
 }
 
+.eatday-scroll-top {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  z-index: 98;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(76, 175, 80, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s;
+  font-family: "Noto Sans KR", "Nunito", sans-serif;
+}
+
+.eatday-scroll-top--visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.eatday-scroll-top:hover {
+  background: #388e3c;
+  box-shadow: 0 6px 22px rgba(76, 175, 80, 0.45);
+}
+
+.eatday-scroll-top:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+.eatday-scroll-top-icon {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .nav-logo {
   display: flex;
   align-items: center;
@@ -567,6 +616,28 @@
   filter: drop-shadow(0 8px 20px rgba(76, 175, 80, 0.2));
 }
 
+.solution-title-typing {
+  min-height: 1.35em;
+}
+
+.solution-title-typing-text {
+  white-space: pre-wrap;
+}
+
+.solution-title-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--green);
+  font-weight: 300;
+  animation: solutionCursorBlink 0.85s step-end infinite;
+}
+
+@keyframes solutionCursorBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .flow-steps {
   display: flex;
   align-items: center;
@@ -597,9 +668,53 @@
   transition: all 0.3s;
 }
 
-.flow-step:hover .step-icon {
+/* 사진 찍기 · AI 인식: 박스 제거, 이모지 140%, 통통 바운스 */
+.flow-step--bounce .step-icon {
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0;
+  font-size: 44.8px;
+  line-height: 1;
+  transform-origin: center bottom;
+  animation: stepIconBounce 1.15s ease-in-out infinite;
+}
+
+.flow-step--bounce.flow-step--bounce-delay .step-icon {
+  animation-delay: 0.18s;
+}
+
+@keyframes stepIconBounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  35% {
+    transform: translateY(-10px) scale(1.06);
+  }
+
+  55% {
+    transform: translateY(0) scale(1);
+  }
+
+  70% {
+    transform: translateY(-4px) scale(1.03);
+  }
+}
+
+.flow-step:not(.flow-step--bounce):hover .step-icon {
   transform: scale(1.1);
   background: var(--green);
+}
+
+.flow-step--bounce:hover .step-icon {
+  background: transparent !important;
+  filter: brightness(1.05);
 }
 
 .flow-step .step-label {
@@ -1139,6 +1254,10 @@
     opacity: 0;
   }
 
+  .eatday-scroll-top {
+    transition: none;
+  }
+
   .hero-mascot-hit.hero-mascot-hit--bouncing {
     animation: none !important;
   }
@@ -1173,5 +1292,14 @@
 
   .reward-card.gold::after {
     animation: none !important;
+  }
+
+  .solution-title-cursor {
+    animation: none !important;
+  }
+
+  .flow-step--bounce .step-icon {
+    animation: none !important;
+    transform: none !important;
   }
 }
